@@ -588,6 +588,7 @@ void SELECT(string input_data, string schema_name){
 void InsertUpdatedData(string new_data, string filepath, int tuples_limit){
     int order_num = 1;
     while (isOverLimit (filepath, tuples_limit, order_num)) order_num++;
+    cout << new_data << endl;
     ofstream file_writer(filepath + "/" + to_string(order_num) + ".csv", ios_base::app);
     if (!isEmpty(filepath + "/" + to_string(order_num) + ".csv")) {
         file_writer << '\n' + new_data;
