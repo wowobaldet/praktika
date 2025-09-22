@@ -15,6 +15,7 @@ void InsertUpdatedData(string new_data, string filepath, int tuples_limit){
 
 
 void replaceTable(string new_text, string filepath, int tuples_limit) {
+    system(("rm -rf " + filepath + "/*.csv").c_str());
     istringstream text_iss(new_text);
     string new_data = "";
     getline(text_iss, new_data, '\n');
@@ -60,8 +61,9 @@ void DELETE(string insert_data, string filepath, int tuples_limit) {
     del_iss >> data;
     del_iss >> data;
     del_iss >> data;
-    if (isLocked(filepath + '/' + data + '/' + data + "_lock.txt")) throw string("this table isn't free");
-    LockorUnlockTable((filepath + '/' + data + '/' + data + "_lock.txt"), "LOCKED");
+    string tabl_name = data;
+    if (isLocked(filepath + '/' + tabl_name + '/' + tabl_name + "_lock.txt")) throw string("this table isn't free");
+    LockorUnlockTable((filepath + '/' + tabl_name + '/' + tabl_name + "_lock.txt"), "LOCKED");
     SelectedTables del_tabl;
     FROM(nullptr, filepath, data, del_tabl);
     del_iss >> data;
@@ -71,5 +73,5 @@ void DELETE(string insert_data, string filepath, int tuples_limit) {
     }
     CutOff(del_tabl.head->table_data, copy_data);
     replaceTable(del_tabl.head->table_data, filepath + "/" + del_tabl.head->tabl_name, tuples_limit);
-    LockorUnlockTable((filepath + '/' + data + '/' + data + "_lock.txt"), "FREE");
+    LockorUnlockTable((filepath + '/' + tabl_name + '/' + tabl_name + "_lock.txt"), "FREE");
 }

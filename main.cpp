@@ -17,9 +17,6 @@ void EnteringCommand(string input_data, Schema sch) {
 
 int main() {
     string result = ReadingJson();
-    string word = "";
-    int index = 0;
-    string words = "";
     Schema sch = FillSchema(result);
     string choix = "";
     cout << result  <<"\nIf you want to update your schema enter 1" << endl;

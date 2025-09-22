@@ -148,9 +148,10 @@ int findTablAndNum(string& full_text, string tabl_name, string colon_name){
     while(getline(line_iss, word, ',')) {
         if (word == tabl_name) {
             break;
-        }
+        } 
         num++;
     }
+    if (tabl_name == colon_name) return num;
     num++;
     while(getline(line_iss, word, ',')) {
         if (word == colon_name) return num;
